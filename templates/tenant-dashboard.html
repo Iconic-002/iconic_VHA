@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Dashboard | Iconic VHA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h2><a href="{{ url_for('index') }}"><i class="fa-solid fa-house-chimney-window" style="color: var(--primary);"></i> ICONIC<span style="color: var(--accent);">VHA</span></a></h2>
+        </div>
+        <div class="nav-auth">
+            <a href="{{ url_for('index') }}" class="btn-primary" style="background: transparent; border: 1px solid var(--card-border);">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Dashboard Layout Grid -->
+    <div class="dashboard-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <a href="#" class="active"><i class="fa-solid fa-gauge"></i> Overview</a>
+            <a href="{{ url_for('houses') }}"><i class="fa-solid fa-magnifying-glass"></i> Browse Units</a>
+            <a href="#"><i class="fa-solid fa-calendar-days"></i> Booked Tours</a>
+            <a href="#"><i class="fa-solid fa-gear"></i> Account Settings</a>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main style="padding: 0;">
+            <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">Tenant Portal</h1>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Active Tours Booked</h4>
+                    <span>{{ tours | length }}</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Saved Properties</h4>
+                    <span>0</span>
+                </div>
+            </div>
+
+            <div class="glass-card" style="padding: 2rem;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Scheduled House Inspections</h3>
+                {% if tours %}
+                    {% for tour in tours %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--card-border);">
+                        <div>
+                            <p style="font-weight: 600;">{{ tour.property }}</p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;"><i class="fa-regular fa-calendar"></i> Date: {{ tour.date }}</p>
+                        </div>
+                        <span style="background: rgba(22, 163, 74, 0.2); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">{{ tour.status }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: var(--text-muted);">No property viewings booked yet.</p>
+                {% endif %}
+            </div>
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

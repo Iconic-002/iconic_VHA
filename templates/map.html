@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Map | Iconic VHA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h2><a href="{{ url_for('index') }}"><i class="fa-solid fa-house-chimney-window" style="color: var(--primary);"></i> ICONIC<span style="color: var(--accent);">VHA</span></a></h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('houses') }}">Browse Houses</a></li>
+            <li><a href="{{ url_for('map_view') }}" class="active">Property Map</a></li>
+        </ul>
+    </nav>
+
+    <!-- Map Container View -->
+    <main style="padding: 7rem 5% 2rem; max-width: 1400px; margin: 0 auto; height: 90vh; display: flex; flex-direction: column;">
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Nairobi Property Map</h1>
+        <div id="map" class="glass-card" style="flex-grow: 1; border-radius: 16px; background: #1a233a; display: flex; align-items: center; justify-content: center;">
+            <p style="color: var(--text-muted);"><i class="fa-solid fa-map-location-dot"></i> Interactive Map Rendering Engine Initialized...</p>
+        </div>
+    </main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Leaflet Map</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+const map = L.map("map").setView([-1.286389, 36.817223], 13);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+L.marker([-1.286389, 36.817223])
+    .addTo(map)
+    .bindPopup("Nairobi, Kenya")
+    .openPopup();
+</script>
+
+</body>
+</html>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+</body>
+</html>

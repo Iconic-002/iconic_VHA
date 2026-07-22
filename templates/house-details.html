@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ property.title }} | Iconic VHA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h2><a href="{{ url_for('index') }}"><i class="fa-solid fa-house-chimney-window" style="color: var(--primary);"></i> ICONIC<span style="color: var(--accent);">VHA</span></a></h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('houses') }}" class="active">Browse Houses</a></li>
+            <li><a href="{{ url_for('map_view') }}">Property Map</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="{{ url_for('login') }}" class="btn-primary" style="background: transparent; border: 1px solid var(--card-border);">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding: 8rem 5% 4rem; max-width: 1300px; margin: 0 auto;">
+        
+        <!-- Header Info -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+            <div>
+                <span style="background: var(--primary); padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">Verified Listing</span>
+                <h1 style="font-size: 2.25rem; font-weight: 800; margin-top: 0.5rem; margin-bottom: 0.25rem;">{{ property.title }}</h1>
+                <p style="color: var(--text-muted);"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> {{ property.location }}</p>
+            </div>
+            <div style="text-align: right;">
+                <h2 style="font-size: 2rem; color: var(--accent); font-weight: 800;">KES {{ "{:,}".format(property.price) }} <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ mo</span></h2>
+            </div>
+        </div>
+
+        <!-- Content Layout -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+            
+            <!-- Left Details Column -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div class="glass-card" style="padding: 2rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Property Description</h3>
+                    <p style="color: var(--text-muted); line-height: 1.8;">{{ property.description }}</p>
+                </div>
+            </div>
+
+            <!-- Right Contact Sidebar -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="glass-card" style="padding: 1.5rem; text-align: center;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">Apex Real Estate Agency</h3>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;"><i class="fa-solid fa-shield-check" style="color: var(--primary);"></i> Verified Corporate Agent</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="https://wa.me/+254794353533" target="_blank" class="btn-primary" style="background-color: #25D366; justify-content: center;">
+                            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Vacant Houses | Iconic VHA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h2><a href="{{ url_for('index') }}"><i class="fa-solid fa-house-chimney-window" style="color: var(--primary);"></i> ICONIC<span style="color: var(--accent);">VHA</span></a></h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('houses') }}" class="active">Browse Houses</a></li>
+            <li><a href="{{ url_for('map_view') }}">Property Map</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="{{ url_for('login') }}" class="btn-primary" style="background: transparent; border: 1px solid var(--card-border);">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding: 8rem 5% 4rem; max-width: 1300px; margin: 0 auto;">
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Available Properties</h1>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            {% for property in properties %}
+            <div class="glass-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700;">{{ property.title }}</h3>
+                <p style="color: var(--text-muted);"><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> {{ property.location }}</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">{{ property.description }}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--card-border);">
+                    <span style="font-size: 1.25rem; font-weight: 800; color: var(--accent);">KES {{ "{:,}".format(property.price) }}</span>
+                    <a href="{{ url_for('house_details', house_id=property.id) }}" class="btn-primary">View Details</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="glass-card" style="grid-column: 1 / -1; padding: 3rem; text-align: center;">
+                <p style="color: var(--text-muted); font-size: 1.1rem;">No properties found matching your filter criteria.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+</body>
+</html>
